@@ -112,6 +112,7 @@ export default function HQSCalculadoraPartner() {
               <SelectField label="Rol del vendedor" value={role} onChange={setRole} options={ROLE_LABELS} full />
 
               <NumberField label="EPC de venta manual" value={saleEpc} onChange={setSaleEpc} full step="0.01" placeholder="Ej: 4.20" highlight emptyZero />
+              
             </div>
           </section>
 
@@ -127,6 +128,8 @@ export default function HQSCalculadoraPartner() {
                 <Metric title="Comisión Venta" value={fmtMoney(data.saleCommission)} />
                 <Metric title="Diferencia en comisión" value={fmtMoney(data.extraCommission)} />
               </div>
+
+              
 
               <div className="grid gap-3 md:grid-cols-2">
                 <div className="rounded-2xl bg-gradient-to-r from-sky-600 via-emerald-500 to-amber-400 p-5 text-white shadow-lg">
@@ -177,7 +180,7 @@ function SelectField({ label, value, onChange, options, full = false }) {
         onChange={(e) => onChange(e.target.value)}
         className="h-12 w-full rounded-2xl border bg-white px-4 text-sm outline-none focus:border-slate-400"
       >
-        {Object.entries(options).map(([optionValue, optionLabel]: any) => (
+        {Object.entries(options).map(([optionValue, optionLabel]) => (
           <option key={optionValue} value={optionValue}>
             {optionLabel}
           </option>
@@ -206,3 +209,5 @@ function Metric({ title, value }) {
     </div>
   );
 }
+
+
