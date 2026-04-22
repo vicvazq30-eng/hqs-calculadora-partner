@@ -143,6 +143,7 @@ export default function HQSCalculadoraPartner() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
               <Metric title="kW" value={`${fmtNum(data.kw)} kW`} tone="sky" />
               <Metric title="Watts" value={`${fmtNum(data.watts, 0)} W`} tone="neutral" />
+              <Metric title="Costo del sistema" value={fmtMoney((Number(panels) || 0) * WATTS_PER_PANEL * EPC_RATE + (Number(batteries) || 0) * BATTERY_PRICE)} tone="neutral" full />
               <Metric title="EPC Base" value={fmtEpc(data.epc)} tone="sky" big />
               <Metric title="EPC Venta" value={fmtEpc(data.saleEpc)} tone="amber" big />
               <Metric title="Diferencia en comisión" value={fmtMoney(data.extraCommission)} tone="amber" full />
