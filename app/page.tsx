@@ -14,11 +14,11 @@ const ROLE_RATES = {
 };
 
 const ROLE_LABELS = {
-  trainee: "Trainee — 6%",
-  consultor: "Consultor — 10%",
-  lider: "Líder — 11%",
-  gerente: "Gerente — 12%",
-  partner: "Partner — 14%",
+  trainee: "Trainee",
+  consultor: "Consultor",
+  lider: "Líder",
+  gerente: "Gerente",
+  partner: "Partner",
 };
 
 const fmtMoney = (n) =>
@@ -98,7 +98,7 @@ export default function HQSCalculadoraPartner() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <section className="rounded-3xl bg-white p-6 shadow-md">
+          <section className="rounded-3xl bg-white p-6 shadow-lg border border-sky-100">
             <div className="mb-5 text-xl font-semibold">Entradas</div>
             <div className="grid gap-5 md:grid-cols-2">
               <StaticField label="Compañía" value="Sunrun" full />
@@ -109,40 +109,28 @@ export default function HQSCalculadoraPartner() {
 
               <NumberField label="Cantidad de baterías" value={batteries} onChange={setBatteries} />
 
-              <SelectField label="Rol del vendedor" value={role} onChange={setRole} options={ROLE_LABELS} full />
+              
 
               <NumberField label="EPC de venta manual" value={saleEpc} onChange={setSaleEpc} full step="0.01" placeholder="Ej: 4.20" highlight emptyZero />
               
             </div>
           </section>
 
-          <section className="rounded-3xl bg-white p-6 shadow-md">
+          <section className="rounded-3xl bg-white p-6 shadow-lg border border-sky-100">
             <div className="mb-5 text-xl font-semibold">Resultados</div>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
-                <Metric title="kW" value={`${fmtNum(data.kw)} kW`} />
-                <Metric title="Watts" value={`${fmtNum(data.watts, 0)} W`} />
-                <Metric title="Sistema Base" value={fmtMoney(data.total)} />
-                <Metric title="Comisión Base" value={fmtMoney(data.commission)} />
-                <Metric title="Sistema Venta" value={fmtMoney(data.saleTotal)} />
-                <Metric title="Comisión Venta" value={fmtMoney(data.saleCommission)} />
-                <Metric title="Diferencia en comisión" value={fmtMoney(data.extraCommission)} />
+                <Metric title="kW" value={`${fmtNum(data.kw)} kW`} color="sky" />
+                <Metric title="Watts" value={`${fmtNum(data.watts, 0)} W`} color="slate" />
+                <Metric title="EPC Base" value={fmtEpc(data.epc)} color="sky" big />
+                <Metric title="EPC Venta" value={fmtEpc(data.saleEpc)} color="amber" big />
+                <Metric title="Diferencia en comisión" value={fmtMoney(data.extraCommission)} color="amber" />
               </div>
 
               
 
-              <div className="grid gap-3 md:grid-cols-2">
-                <div className="rounded-2xl bg-gradient-to-r from-sky-600 via-emerald-500 to-amber-400 p-5 text-white shadow-lg">
-                  <div className="text-sm">EPC Base</div>
-                  <div className="text-3xl font-bold">{fmtEpc(data.epc)}</div>
-                </div>
-
-                <div className="rounded-2xl bg-gradient-to-r from-sky-600 via-emerald-500 to-amber-400 p-5 text-white shadow-lg">
-                  <div className="text-sm">EPC Venta</div>
-                  <div className="text-3xl font-bold">{fmtEpc(data.saleEpc)}</div>
-                </div>
-              </div>
-            </div>
+              
+                  </div>
           </section>
         </div>
       </div>
@@ -201,11 +189,19 @@ function StaticField({ label, value, full = false, muted = false }) {
   );
 }
 
-function Metric({ title, value }) {
+function Metric({ title, value, color = "slate", big = false }) {
+  const colors = {
+    slate: "bg-white text-slate-900 border-slate-200",
+    sky: "bg-sky-50 text-sky-900 border-sky-300",
+    amber: "bg-amber-50 text-amber-900 border-amber-300",
+  };
+
   return (
-    <div className="rounded-2xl border bg-slate-50 p-4">
-      <div className="text-sm text-slate-500">{title}</div>
-      <div className="mt-1 text-xl font-semibold">{value}</div>
+    <div className={`rounded-2xl border p-4 ${colors[color]}`}>
+      <div className="text-sm opacity-70">{title}</div>
+      <div className={`mt-1 font-semibold ${big ? "text-3xl" : "text-xl"}`}>
+        {value}
+      </div>
     </div>
   );
 }
