@@ -159,25 +159,6 @@ function NumberField({ label, value, onChange, full = false, step = "1", placeho
   );
 }
 
-function SelectField({ label, value, onChange, options, full = false }) {
-  return (
-    <div className={`space-y-2 ${full ? "md:col-span-2" : ""}`}>
-      <label className="text-sm font-medium text-slate-700">{label}</label>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="h-12 w-full rounded-2xl border bg-white px-4 text-sm outline-none focus:border-slate-400"
-      >
-       {Object.entries(options as Record<string, string>).map(([optionValue, optionLabel]) => (
-          <option key={optionValue} value={optionValue}>
-            {optionLabel}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
-
 function StaticField({ label, value, full = false, muted = false }) {
   return (
     <div className={`space-y-2 ${full ? "md:col-span-2" : ""}`}>
