@@ -168,7 +168,7 @@ function SelectField({ label, value, onChange, options, full = false }) {
         onChange={(e) => onChange(e.target.value)}
         className="h-12 w-full rounded-2xl border bg-white px-4 text-sm outline-none focus:border-slate-400"
       >
-        {Object.entries(options).map(([optionValue, optionLabel]) => (
+       {Object.entries(options as Record<string, string>).map(([optionValue, optionLabel]) => (
           <option key={optionValue} value={optionValue}>
             {optionLabel}
           </option>
