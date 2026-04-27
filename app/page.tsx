@@ -29,8 +29,8 @@ const fmtEpc = (n: number) => {
 };
 
 export default function HQSCalculadoraPartner() {
-  const [panels, setPanels] = useState(20);
-  const [batteries, setBatteries] = useState(1);
+  const [panels, setPanels] = useState(32);
+  const [batteries, setBatteries] = useState(2);
   const [role] = useState<keyof typeof ROLE_RATES>("consultor");
   const [saleEpc, setSaleEpc] = useState(0);
 
@@ -47,13 +47,13 @@ export default function HQSCalculadoraPartner() {
     const batteryTotal = b * BATTERY_PRICE;
     const total = solarTotal + batteryTotal;
 
-    const epc = kw > 0 ? total / kw : 0;
+    const epc = watts > 0 ? total / watts : 0;
     const commission = total * roleRate;
 
     const saleEpcFinal = saleEpcValue > 0 ? saleEpcValue : epc;
-    const saleTotal = kw > 0 ? kw * 1000 * saleEpcFinal : 0;
-    const saleCommission = saleTotal * roleRate;
-    const extraCommission = Math.max(saleCommission - commission, 0);
+
+    // Toda la diferencia entre EPC base y EPC venta va completa al vendedor
+    const extraCommission = Math.max(saleEpcFinal - epc, 0) * watts;
 
     return {
       watts,
