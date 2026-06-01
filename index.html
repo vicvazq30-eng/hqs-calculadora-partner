@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora Escalonada HQS Energy</title>
+    <meta name="description" content="Calculadora para vendedores HQS Energy: pagos escalonados al 1.99% y 2.99% por 15 y 25 años." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero-card">
+        <p class="eyebrow">HQS Energy · Herramienta para vendedores</p>
+        <h1>Calculadora de pagos escalonados</h1>
+        <p class="hero-copy">Calcula pagos mensuales con escaladores de 1.99% y 2.99% a 15 o 25 años. Perfecta para explicar proyecciones claras al cliente.</p>
+
+        <form id="calculatorForm" class="calculator-panel">
+          <label>
+            Pago inicial mensual
+            <div class="input-wrap">
+              <span>$</span>
+              <input id="initialPayment" type="number" step="0.01" min="0" value="149.59" required />
+            </div>
+          </label>
+
+          <label>
+            Escalador anual
+            <select id="escalatorRate">
+              <option value="1.99">1.99%</option>
+              <option value="2.99">2.99%</option>
+            </select>
+          </label>
+
+          <label>
+            Término
+            <select id="termYears">
+              <option value="15">15 años</option>
+              <option value="25" selected>25 años</option>
+            </select>
+          </label>
+
+          <button type="submit">Calcular</button>
+        </form>
+      </section>
+
+      <section class="results-grid">
+        <article class="summary-card">
+          <span>Pago inicial</span>
+          <strong id="startingPayment">$149.59</strong>
+        </article>
+        <article class="summary-card">
+          <span>Pago final</span>
+          <strong id="finalPayment">$0.00</strong>
+        </article>
+        <article class="summary-card">
+          <span>Total estimado</span>
+          <strong id="totalPaid">$0.00</strong>
+        </article>
+        <article class="summary-card">
+          <span>Promedio mensual</span>
+          <strong id="averagePayment">$0.00</strong>
+        </article>
+      </section>
+
+      <section class="table-card">
+        <div class="table-header">
+          <div>
+            <p class="eyebrow">Desglose anual</p>
+            <h2 id="tableTitle">Proyección</h2>
+          </div>
+          <button id="copyButton" type="button" class="secondary-button">Copiar tabla</button>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Año</th>
+                <th>Pago mensual</th>
+                <th>Aumento anual</th>
+                <th>Total anual</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
