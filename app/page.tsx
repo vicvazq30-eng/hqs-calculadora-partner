@@ -296,3 +296,4 @@ function Calculator({ className = "" }: { className?: string }) {
 
 function TrendingUp({ className = "" }: { className?: string }) {
   return <span className={className}>📈</span>;
+}
